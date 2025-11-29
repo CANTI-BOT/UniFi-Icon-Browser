@@ -16,7 +16,7 @@ A simple, client-side tool for browsing and searching UniFi device icons with au
 
 ## What It Does
 
-This tool solves a major fustration I have with UniFi: **finding the right device icon quickly** (or, at least a close match...🙄). 
+This tool solves a major fustration I have with UniFi: **finding the right device icon quickly** (or at least a close match).         
 Instead of scrolling through **THOUSANDS** of icons, or trying to search the **EXACT** name of the device in the UniFi portal, you can:
 
 1. Extract the entire device list from your UniFi portal
