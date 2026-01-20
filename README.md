@@ -252,9 +252,22 @@ UniFi-Icon-Browser/
 
 ---
 
+## 📚 Documentation
+
+Detailed documentation is available in the [`docs/`](docs/) folder:
+
+| Document | Description |
+|----------|-------------|
+| [User Guide](docs/USER_GUIDE.md) | Complete guide for using the extension |
+| [Architecture](docs/ARCHITECTURE.md) | Technical architecture and diagrams |
+| [API Reference](docs/API.md) | Internal APIs and data structures |
+| [Contributing](docs/CONTRIBUTING.md) | How to contribute to the project |
+
+---
+
 ## 🤝 Contributing
 
-Contributions are welcome! Here are some ways you can help:
+Contributions are welcome! See the [Contributing Guide](docs/CONTRIBUTING.md) for details.
 
 - 🐛 Report bugs
 - 💡 Suggest new features
