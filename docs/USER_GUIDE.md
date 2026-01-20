@@ -48,22 +48,8 @@ The extension comes **pre-loaded with ~5,500 device icons**. You can start brows
 ### The Main Interface
 
 ```
-┌─────────────────────────────────────────┐
-│ UniFi Icon Browser            [⚙️]     │
-├─────────────────────────────────────────┤
-│ [All Devices] [Custom Icons]            │
-├─────────────────────────────────────────┤
-│ 🔍 Search devices...                    │
-├─────────────────────────────────────────┤
-│ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐    │
-│ │ 📱 │ │ 💻 │ │ 🖥️ │ │ 📺 │ │ 🔌 │    │
-│ │    │ │    │ │    │ │    │ │    │    │
-│ │Name│ │Name│ │Name│ │Name│ │Name│    │
-│ └────┘ └────┘ └────┘ └────┘ └────┘    │
-│        ... more icons ...              │
-├─────────────────────────────────────────┤
-│ Showing 5,487 devices                   │
-└─────────────────────────────────────────┘
+<img width="947" height="960" alt="brave_bYVzliPsPS" src="https://github.com/user-attachments/assets/78fe806a-c2ab-43a3-b441-84640fa11699" />
+
 ```
 
 ### Tabs
