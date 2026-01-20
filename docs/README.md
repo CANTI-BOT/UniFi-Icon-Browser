@@ -42,19 +42,19 @@ The UniFi Icon Browser is a Chrome Extension that provides:
 ## Architecture Summary
 
 ```
-┌─────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────┐
 │                Chrome Extension                  │
-├─────────────────────────────────────────────────┤
+├──────────────────────────────────────────────────┤
 │  UI Layer    │  Service Worker  │  Content Layer │
 │  - Popup     │  - Background    │  - Content     │
 │  - Options   │                  │  - Injected    │
-├─────────────────────────────────────────────────┤
+├──────────────────────────────────────────────────┤
 │              Shared Modules                      │
-│  Config  │  Utils  │  StorageManager            │
-├─────────────────────────────────────────────────┤
+│  Config  │  Utils  │  StorageManager             │
+├──────────────────────────────────────────────────┤
 │              Data Storage                        │
-│  Chrome Local Storage  │  Pre-loaded Database   │
-└─────────────────────────────────────────────────┘
+│  Chrome Local Storage  │  Pre-loaded Database    │
+└──────────────────────────────────────────────────┘
 ```
 
 ## Getting Help
