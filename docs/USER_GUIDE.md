@@ -48,7 +48,7 @@ The extension comes **pre-loaded with ~5,500 device icons**. You can start brows
 ### The Main Interface
 
 
-<img width="947" height="960" alt="brave_bYVzliPsPS" src="https://github.com/user-attachments/assets/78fe806a-c2ab-43a3-b441-84640fa11699" />
+<img width="500" alt="Main Extention Interface" src="https://github.com/user-attachments/assets/78fe806a-c2ab-43a3-b441-84640fa11699" />
 
 
 
@@ -96,16 +96,8 @@ The extension comes **pre-loaded with ~5,500 device icons**. You can start brows
 
 Right-click on any device icon to access quick actions:
 
-```
-┌─────────────────────────┐
-│ Copy Device Name        │
-│ Copy Device ID          │
-│ Copy Image URL          │
-│ Open Image in New Tab   │
-├─────────────────────────┤
-│ Use as Custom Icon      │
-└─────────────────────────┘
-```
+<img width="381" height="406" alt="Right-Click Menu" src="https://github.com/user-attachments/assets/b820a6e8-5b27-4333-abe9-6281ccfcbef7" />
+
 
 ### Actions
 
@@ -158,35 +150,8 @@ Or use the extension:
 
 #### Step 3: Add the Mapping
 
-```
-┌─────────────────────────────────────────────────────┐
-│ Add Custom Icon Mapping                             │
-├─────────────────────────────────────────────────────┤
-│ Donor Device ID (Fingerprint ID)*                   │
-│ ┌─────────────────────────────────────────────────┐ │
-│ │ 500                                             │ │
-│ └─────────────────────────────────────────────────┘ │
-│                                                     │
-│ Display Name*                                       │
-│ ┌─────────────────────────────────────────────────┐ │
-│ │ My Home Server                                  │ │
-│ └─────────────────────────────────────────────────┘ │
-│                                                     │
-│ Custom Icon URL*                                    │
-│ ┌─────────────────────────────────────────────────┐ │
-│ │ https://example.com/server-icon.png            │ │
-│ └─────────────────────────────────────────────────┘ │
-│                                                     │
-│ ▼ Device Info Overrides (Optional)                 │
-│                                                     │
-│ Manufacturer    Model           OS                  │
-│ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐    │
-│ │ Dell        │ │ PowerEdge   │ │ Ubuntu      │    │
-│ └─────────────┘ └─────────────┘ └─────────────┘    │
-│                                                     │
-│                         [Add Custom Icon Mapping]   │
-└─────────────────────────────────────────────────────┘
-```
+<img width="800" alt="Custom Icon Mapping" src="https://github.com/user-attachments/assets/0ccc0f9b-bdee-467f-af72-aa2581c41591" />
+
 
 #### Fields Explained
 
@@ -239,11 +204,12 @@ Import mappings:
 
 To get the latest devices (when new UniFi products are released):
 
-1. Navigate to your UniFi portal
-2. Log in and go to any device
-3. Click "Change Icon" to open the icon picker
-4. The extension automatically captures all devices
+Navigate to your UniFi portal
+Log in and go to any device
+Click "Change Icon" (1) to open the icon picker
+Click the "Refresh Icon"(2) in the main pop-up wndow
 5. Check the badge for confirmation
+<img width="1725" height="897" alt="ShareX_2Qwgy3NPkc" src="https://github.com/user-attachments/assets/a19be3ea-98e0-48a7-abb3-fcecc0aeeb8a" />
 
 ### Import/Export
 
