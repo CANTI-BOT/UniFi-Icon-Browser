@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniFi Icon Browser - Options</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <header class="header">
+            <img src="../icons/icon48.png" alt="UniFi Icon Browser" class="logo">
+            <div class="header-text">
+                <h1>UniFi Icon Browser</h1>
+                <span class="version">Options</span>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="settings">Settings</button>
+            <button class="tab-btn" data-tab="browser">Icon Browser</button>
+        </nav>
+
+        <main class="content">
+            <!-- Settings Tab Panel -->
+            <div class="tab-panel active" id="settingsPanel">
+                <div class="settings-layout">
+                    <!-- Sidebar Navigation -->
+                    <aside class="settings-sidebar">
+                        <nav class="settings-nav">
+                            <button class="settings-nav-btn active" data-section="custom-icons">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                                    <path d="M21 15l-5-5L5 21"/>
+                                </svg>
+                                <span>Custom Icons</span>
+                                <span class="nav-badge" id="customIconBadge">0</span>
+                            </button>
+                            <button class="settings-nav-btn" data-section="data-management">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                                </svg>
+                                <span>Data Management</span>
+                                <span class="nav-badge" id="cacheBadge">0</span>
+                            </button>
+                            <button class="settings-nav-btn" data-section="danger-zone">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                    <line x1="12" y1="9" x2="12" y2="13"/>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                </svg>
+                                <span>Danger Zone</span>
+                            </button>
+                        </nav>
+                    </aside>
+
+                    <!-- Settings Content Area -->
+                    <div class="settings-content">
+                        <!-- Custom Icons Section -->
+                        <section class="settings-section active" id="section-custom-icons">
+                            <div class="section-header">
+                                <h2>Custom Icon Overrides</h2>
+                                <p class="description">Replace UniFi device icons with custom images. Assign a "donor" device ID in UniFi, then map it here.</p>
+                            </div>
+
+                            <div class="section-toolbar">
+                                <div class="stat-inline">
+                                    <span class="stat-value" id="customIconCount">0</span>
+                                    <span class="stat-label">custom icons configured</span>
+                                </div>
+                                <div class="toolbar-buttons">
+                                    <button id="exportMappingsBtn" class="btn btn-sm btn-secondary">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                            <polyline points="7 10 12 15 17 10"/>
+                                            <line x1="12" y1="15" x2="12" y2="3"/>
+                                        </svg>
+                                        Export
+                                    </button>
+                                    <button id="importMappingsBtn" class="btn btn-sm btn-secondary">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                            <polyline points="17 8 12 3 7 8"/>
+                                            <line x1="12" y1="3" x2="12" y2="15"/>
+                                        </svg>
+                                        Import
+                                    </button>
+                                </div>
+                            </div>
+                            <input type="file" id="mappingsFileInput" accept=".json" style="display: none;">
+
+                            <div class="custom-icon-form" id="customIconForm">
+                                <div class="edit-mode-indicator" id="editModeIndicator">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                    <span>Editing mapping for ID: <strong id="editingId"></strong></span>
+                                    <button class="cancel-edit-btn" id="cancelEditBtn">Cancel</button>
+                                </div>
+
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="donorIdInput">Donor Device ID</label>
+                                        <input type="text" id="donorIdInput" placeholder="e.g., 4521" class="input">
+                                        <span class="form-hint">The UniFi fingerprint ID assigned to your device</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="customIconName">Display Name (optional)</label>
+                                        <input type="text" id="customIconName" placeholder="e.g., Synology NAS" class="input">
+                                        <span class="form-hint">Label for your reference</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="customIconUrl">Custom Icon URL</label>
+                                    <input type="text" id="customIconUrl" placeholder="https://cdn.jsdelivr.net/..." class="input">
+                                    <span class="form-hint">Direct URL to a PNG/SVG image</span>
+                                </div>
+
+                                <div class="form-divider">
+                                    <span>Device Info Overrides (shown in UniFi side panel)</span>
+                                </div>
+
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="customDeviceName">Device Name</label>
+                                        <input type="text" id="customDeviceName" placeholder="e.g., Synology DS920+" class="input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="customManufacturer">Manufacturer</label>
+                                        <input type="text" id="customManufacturer" placeholder="e.g., Synology Inc." class="input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="customModel">Model</label>
+                                        <input type="text" id="customModel" placeholder="e.g., DS920+" class="input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="customOS">OS</label>
+                                        <input type="text" id="customOS" placeholder="e.g., DSM 7.2" class="input">
+                                    </div>
+                                </div>
+
+                                <button id="addCustomIconBtn" class="btn btn-primary btn-full">
+                                    <svg id="addBtnIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19"/>
+                                        <line x1="5" y1="12" x2="19" y2="12"/>
+                                    </svg>
+                                    <span id="addBtnText">Add Custom Icon Mapping</span>
+                                </button>
+                            </div>
+
+                            <div class="custom-icons-list" id="customIconsList">
+                                <!-- Custom icon mappings will be rendered here -->
+                            </div>
+                        </section>
+
+                        <!-- Data Management Section -->
+                        <section class="settings-section" id="section-data-management">
+                            <div class="section-header">
+                                <h2>Data Management</h2>
+                                <p class="description">Manage your device icon database. Export to back up, import to restore, or clear to start fresh.</p>
+                            </div>
+
+                            <div class="data-cards">
+                                <div class="data-card">
+                                    <div class="data-card-header">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                                        </svg>
+                                        <div>
+                                            <h3>Device ID Cache</h3>
+                                            <p>Official UniFi device fingerprints synced from icon picker</p>
+                                        </div>
+                                    </div>
+                                    <div class="data-card-stat">
+                                        <span class="stat-value" id="cacheCount">0</span>
+                                        <span class="stat-label">cached devices</span>
+                                    </div>
+                                    <div class="data-card-actions">
+                                        <button id="exportBtn" class="btn btn-primary">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                                <polyline points="7 10 12 15 17 10"/>
+                                                <line x1="12" y1="15" x2="12" y2="3"/>
+                                            </svg>
+                                            Export
+                                        </button>
+                                        <button id="importBtn" class="btn btn-secondary">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                                <polyline points="17 8 12 3 7 8"/>
+                                                <line x1="12" y1="3" x2="12" y2="15"/>
+                                            </svg>
+                                            Import
+                                        </button>
+                                        <button id="clearBtn" class="btn btn-danger-outline">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="3 6 5 6 21 6"/>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                            </svg>
+                                            Clear
+                                        </button>
+                                    </div>
+                                    <input type="file" id="fileInput" accept=".json" style="display: none;">
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Danger Zone Section -->
+                        <section class="settings-section" id="section-danger-zone">
+                            <div class="section-header">
+                                <h2>Danger Zone</h2>
+                                <p class="description">Irreversible actions. Proceed with caution.</p>
+                            </div>
+
+                            <div class="danger-card">
+                                <div class="danger-card-content">
+                                    <div class="danger-card-info">
+                                        <h3>Reset Extension</h3>
+                                        <p>Completely reset to factory state. This will delete all custom icon mappings, cached devices, and settings.</p>
+                                    </div>
+                                    <button id="resetBtn" class="btn btn-danger">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                                            <path d="M3 3v5h5"/>
+                                        </svg>
+                                        Reset Extension
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Status Message -->
+                        <div id="statusMessage" class="status-message hidden"></div>
+                    </div>
+                </div>
+            </div><!-- End Settings Tab Panel -->
+
+            <!-- Icon Browser Tab Panel -->
+            <div class="tab-panel" id="browserPanel">
+                <section class="section browser-section">
+                    <div class="browser-header">
+                        <h2>Device Icon Browser</h2>
+                        <div class="browser-stats">
+                            <span id="browserDeviceCount">0 devices</span>
+                            <span class="stat-separator">•</span>
+                            <span id="browserResultsCount">0 results</span>
+                        </div>
+                    </div>
+                    <p class="description">Browse and search all UniFi device icons at full size. Click an icon to copy its name, or right-click for more options.</p>
+
+                    <div class="browser-controls">
+                        <div class="search-container">
+                            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="M21 21l-4.35-4.35"/>
+                            </svg>
+                            <input type="text" id="browserSearchInput" class="input search-input" placeholder="Search devices by name or ID...">
+                        </div>
+                        <div class="size-selector">
+                            <label>Icon Size:</label>
+                            <select id="iconSizeSelect" class="input select-input">
+                                <option value="129" selected>Medium (129px)</option>
+                                <option value="257">Large (257px)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="browser-grid-container" id="browserGridContainer">
+                        <div class="browser-loading" id="browserLoading">
+                            <div class="spinner"></div>
+                            <span>Loading icons...</span>
+                        </div>
+                        <div class="browser-grid" id="browserGrid"></div>
+                        <div class="browser-no-results" id="browserNoResults" style="display: none;">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="M21 21l-4.35-4.35"/>
+                                <path d="M8 8l6 6M14 8l-6 6"/>
+                            </svg>
+                            <span>No devices found</span>
+                        </div>
+                    </div>
+                </section>
+            </div><!-- End Icon Browser Tab Panel -->
+
+            <!-- Browser Notification -->
+            <div id="browserNotification" class="browser-notification"></div>
+
+            <!-- Browser Context Menu -->
+            <div id="browserContextMenu" class="context-menu">
+                <div class="context-item" data-action="copyName">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                    </svg>
+                    Copy Name
+                </div>
+                <div class="context-item" data-action="copyId">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16v16H4z"/>
+                        <path d="M9 9h6M9 13h6"/>
+                    </svg>
+                    Copy ID
+                </div>
+                <div class="context-item" data-action="copyUrl">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                    Copy Image URL
+                </div>
+                <div class="context-item" data-action="openImage">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                    Open Full Size
+                </div>
+                <div class="context-separator"></div>
+                <div class="context-item" data-action="useAsCustom">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"/>
+                    </svg>
+                    Use as Custom Icon
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <span>UniFi Icon Browser v<span id="versionNumber">1.3.0</span></span>
+        </footer>
+    </div>
+
+    <script src="../scripts/config.js"></script>
+    <script src="../scripts/utils.js"></script>
+    <script src="../scripts/storageManager.js"></script>
+    <script src="options.js"></script>
+</body>
+</html>

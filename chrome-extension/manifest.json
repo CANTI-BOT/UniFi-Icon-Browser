@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "UniFi Device Icon Browser",
+  "version": "1.4.0",
+  "description": "Browse and search UniFi device icons with automatic device name extraction and custom icon overrides",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "clipboardWrite",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://static.ui.com/*",
+    "https://static.ubnt.com/*",
+    "https://*.ui.com/*",
+    "https://*.unifi.ui.com/*",
+    "http://*/network/*",
+    "https://*/network/*",
+    "http://*/protect/*",
+    "https://*/protect/*"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "UniFi Icon Browser"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.ui.com/*",
+        "https://*.unifi.ui.com/*",
+        "http://*/network/*",
+        "https://*/network/*",
+        "http://*/protect/*",
+        "https://*/protect/*"
+      ],
+      "js": ["scripts/content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["scripts/injected.js", "data/fingerprint-database.json"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "options_page": "options/options.html"
+}
